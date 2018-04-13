@@ -23,6 +23,7 @@ class Engine:
         else:
             print("[*] No cookie set, continuing...")
 
+        count_matched = 0
         for payload in self.payloads:
             for url in self.urls:
                 urlTarget = url + payload
@@ -33,7 +34,10 @@ class Engine:
                 for match in self.matches[payload]:
                     if match in r.text:
                         print("Interesting: " + url + payload)
+                        count_matched = count_matched + 1
                     if "syntax error" in r.text:
                         print("PHP error: " + url + payload)
+        if count_matched == 0:
+            print("[-] Nothing found")
 
         print("[*] Scan completed")
