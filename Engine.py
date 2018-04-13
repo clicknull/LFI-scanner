@@ -33,5 +33,7 @@ class Engine:
                 for match in self.matches[payload]:
                     if match in r.text:
                         print("Interesting: " + url + payload)
+                    if "syntax error" in r.text:
+                        print("PHP error: " + url + payload)
 
         print("[*] Scan completed")
